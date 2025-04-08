@@ -12,7 +12,7 @@ basic.forever(function () {
     } else {
         黑天 = 0
     }
-    有人 = pins.digitalReadPin(DigitalPin.P14)
+    有人 = pins.digitalReadPin(DigitalPin.P5)
     serial.writeValue("y", 有人)
     if (有人 == 1) {
         if (黑天 == 1) {
@@ -25,15 +25,12 @@ basic.forever(function () {
         DigitalPin.P12,
         PingUnit.Centimeters
         )
-        serial.writeValue("z", 距离)
         if (距离 < 20) {
             music.play(music.builtInPlayableMelody(Melodies.BaDing), music.PlaybackMode.InBackground)
         }
     } else {
         pins.digitalWritePin(DigitalPin.P16, 0)
     }
-    // 避免频繁触发
-    basic.pause(500)
 })
 // 触摸P2播放音乐
 basic.forever(function () {
