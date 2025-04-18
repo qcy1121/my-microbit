@@ -2,18 +2,15 @@ let 距离 = 0
 let 有人 = 0
 let 黑天 = 0
 let 暗度 = 0
-serial.redirectToUSB()
-pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
+pins.setPull(DigitalPin.P4, PinPullMode.PullUp)
 basic.forever(function () {
     暗度 = pins.analogReadPin(AnalogReadWritePin.P3)
-    serial.writeValue("x", 暗度)
     if (暗度 >= 600) {
         黑天 = 1
     } else {
         黑天 = 0
     }
     有人 = pins.digitalReadPin(DigitalPin.P5)
-    serial.writeValue("y", 有人)
     if (有人 == 1) {
         if (黑天 == 1) {
             pins.digitalWritePin(DigitalPin.P16, 1)
@@ -34,7 +31,7 @@ basic.forever(function () {
 })
 // 触摸P2播放音乐
 basic.forever(function () {
-    if (pins.digitalReadPin(DigitalPin.P1) == 0) {
+    if (pins.digitalReadPin(DigitalPin.P4) == 0) {
         music.play(music.builtInPlayableMelody(Melodies.BaDing), music.PlaybackMode.InBackground)
     }
 })
